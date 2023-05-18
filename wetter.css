@@ -1,0 +1,39 @@
+body {
+  background-image: url("bild\ for\ weather.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.weather-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.top_part {
+  background-color: skyblue;
+  padding: 20px;
+  text-align: center;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+}
