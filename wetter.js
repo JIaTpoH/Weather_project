@@ -1,15 +1,12 @@
-const apiKey = "fbe2c2fdac7fe2e53740d0f700d43424";
-function getWeatherData() {
-   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${apiKey}`;
 
-   fetch(apiUrl)
-   .then(response => response.json())
-   .then(data => {
-    console.log(data);
-   })
-   .catch(error => {
-    console.log("Error", error);
-   })
-}
+var todayLink = document.getElementById("today");
 
-getWeatherData();
+
+todayLink.addEventListener("click", function(event) {
+  event.preventDefault();
+  document.getElementById("city").textContent = "Ваш город: Франкфурт";
+  document.getElementById("temperature").textContent = "Текущая температура: 25°C";
+  document.getElementById("wind").textContent = "Скорость ветра: 10 м/c";
+  document.getElementById("humidity").textContent = "Влажность: 70%";
+
+});

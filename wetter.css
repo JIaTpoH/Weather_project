@@ -51,3 +51,18 @@ p {
   display: block;
   text-align: center;
 }
+.content {
+  display: flex;
+  color: blue;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column; 
+  text-align: center;
+}
+
+.content p {
+  font-size: 25px;
+  font-weight: bolder;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
