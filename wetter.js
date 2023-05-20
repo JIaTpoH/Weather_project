@@ -6,7 +6,7 @@ if (navigator.geolocation) {
 
 
     const apiKey = 'fbe2c2fdac7fe2e53740d0f700d43424';
-    let weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey;
+    const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey;
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', weatherUrl, true);
@@ -15,9 +15,9 @@ if (navigator.geolocation) {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
       
-        const temperature = response.main.temp;
-        const windSpeed = response.wind.speed;
-        const humidity = response.main.humidity;
+        let temperature = response.main.temp;
+        let windSpeed = response.wind.speed;
+        let humidity = response.main.humidity;
 
         document.getElementById('temperature').textContent = 'Текущая температура: ' + temperature + '°C';
         document.getElementById('wind').textContent = 'Скорость ветра: ' + windSpeed + ' м/c';
@@ -26,5 +26,28 @@ if (navigator.geolocation) {
     };
 
     xhr.send();
+  });
+}
+
+
+
+document.getElementById('start-animation').addEventListener('click', function() {
+  createMeteor();
+});
+
+function createMeteor() {
+  const meteor = document.createElement('div');
+  meteor.classList.add('meteor');
+
+  const container = document.getElementById('meteor-container');
+  const containerWidth = container.offsetWidth;
+  const containerHeight = container.offsetHeight;
+  const startPosition = Math.random() * containerWidth;
+
+  meteor.style.left = startPosition + 'px';
+  container.appendChild(meteor);
+
+  meteor.addEventListener('animationend', function() {
+    container.removeChild(meteor);
   });
 }
