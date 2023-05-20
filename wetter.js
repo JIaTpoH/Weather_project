@@ -32,8 +32,14 @@ if (navigator.geolocation) {
 
 
 document.getElementById('start-animation').addEventListener('click', function() {
-  createMeteor();
+  createMeteor(),startAnimation();
 });
+
+function startAnimation() {
+  for (let i = 0; i < 50; ++i) {
+    setTimeout(createMeteor, i * 250);
+  }
+}
 
 function createMeteor() {
   const meteor = document.createElement('div');

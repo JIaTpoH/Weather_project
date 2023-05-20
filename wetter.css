@@ -4,6 +4,7 @@ body {
   background-size: cover;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 .weather-container {
@@ -69,7 +70,7 @@ p {
 }
 
 #meteor-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -92,10 +93,10 @@ p {
 @keyframes meteorFall {
   0% {
     opacity: 1;
-    transform: translate(0, -100%);
+    transform: translateY(-100vh);
   }
   100% {
     opacity: 0;
-    transform: translate(100%, 100%);
+    transform: translateY(100vh);
   }
 }
