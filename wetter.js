@@ -1,41 +1,48 @@
-const todayButton = document.getElementById('today');
-todayButton.addEventListener('click', function(){
+const todayButton = document.getElementById("today");
+todayButton.addEventListener("click", function () {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
+      const apiKey = "fbe2c2fdac7fe2e53740d0f700d43424";
+      const weatherUrl =
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&appid=" +
+        apiKey;
 
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", weatherUrl, true);
 
-    const apiKey = 'fbe2c2fdac7fe2e53740d0f700d43424';
-    const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey;
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
 
-    const xhr = new XMLHttpRequest();
-     xhr.open('GET', weatherUrl, true);
-    
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-      
-        let temperature = response.main.temp;
-        let windSpeed = response.wind.speed;
-        let humidity = response.main.humidity;
+          let temperature = response.main.temp;
+          let windSpeed = response.wind.speed;
+          let humidity = response.main.humidity;
 
-        document.getElementById('temperature').textContent = 'Текущая температура: ' + temperature + '°C';
-        document.getElementById('wind').textContent = 'Скорость ветра: ' + windSpeed + ' м/c';
-        document.getElementById('humidity').textContent = 'Влажность: ' + humidity + '%';
-      }
-    };
+          document.getElementById("temperature").textContent =
+            "Текущая температура: " + temperature + "°C";
+          document.getElementById("wind").textContent =
+            "Скорость ветра: " + windSpeed + " м/c";
+          document.getElementById("humidity").textContent =
+            "Влажность: " + humidity + "%";
+        }
+      };
+      xhr.send();
+    });
+  }
+});
 
-    xhr.send();
+document
+  .getElementById("start-animation")
+  .addEventListener("click", function () {
+    createMeteor(), startAnimation();
   });
-}
-});
-
-
-document.getElementById('start-animation').addEventListener('click', function() {
-  createMeteor(),startAnimation();
-});
 
 function startAnimation() {
   for (let i = 0; i < 50; ++i) {
@@ -44,18 +51,18 @@ function startAnimation() {
 }
 
 function createMeteor() {
-  const meteor = document.createElement('div');
-  meteor.classList.add('meteor');
+  const meteor = document.createElement("div");
+  meteor.classList.add("meteor");
 
-  const container = document.getElementById('meteor-container');
+  const container = document.getElementById("meteor-container");
   const containerWidth = container.offsetWidth;
   const containerHeight = container.offsetHeight;
   const startPosition = Math.random() * containerWidth;
 
-  meteor.style.left = startPosition + 'px';
+  meteor.style.left = startPosition + "px";
   container.appendChild(meteor);
 
-  meteor.addEventListener('animationend', function() {
+  meteor.addEventListener("animationend", function () {
     container.removeChild(meteor);
   });
 }
