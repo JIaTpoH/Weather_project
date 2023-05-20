@@ -1,3 +1,5 @@
+const todayButton = document.getElementById('today');
+todayButton.addEventListener('click', function(){
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
@@ -9,7 +11,7 @@ if (navigator.geolocation) {
     const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey;
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', weatherUrl, true);
+     xhr.open('GET', weatherUrl, true);
     
     xhr.onload = function() {
       if (xhr.status === 200) {
@@ -28,7 +30,7 @@ if (navigator.geolocation) {
     xhr.send();
   });
 }
-
+});
 
 
 document.getElementById('start-animation').addEventListener('click', function() {
