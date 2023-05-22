@@ -83,7 +83,7 @@ p {
   position: absolute;
   width: 45px;
   height: 45px;
-  background-color: #1e0b0b;
+  background-color: #f20808;
   pointer-events: none;
   animation-name: meteorFall;
   animation-duration: 2s;

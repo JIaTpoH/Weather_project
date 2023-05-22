@@ -1,4 +1,6 @@
 const todayButton = document.getElementById("today");
+const tomorrowButton = document.getElementById("tomorrow");
+
 todayButton.addEventListener("click", function () {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -37,6 +39,46 @@ todayButton.addEventListener("click", function () {
     });
   }
 });
+
+tomorrowButton.addEventListener("click", function () {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+
+      const apiKey = "fbe2c2fdac7fe2e53740d0f700d43424";
+      const weatherUrl =
+      'api.openweathermap.org/data/2.5/forecast/daily?lat=' +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&appid=" +
+        apiKey;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", weatherUrl, true);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+
+          let temperature = response.main.temp;
+          let windSpeed = response.wind.speed;
+          let humidity = response.main.humidity;
+
+          document.getElementById("temperature").textContent =
+            "Текущая температура: " + temperature + "°C";
+          document.getElementById("wind").textContent =
+            "Скорость ветра: " + windSpeed + " м/c";
+          document.getElementById("humidity").textContent =
+            "Влажность: " + humidity + "%";
+        }
+      };
+      xhr.send();
+    });
+  }
+});
+
 
 document
   .getElementById("start-animation")
