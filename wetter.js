@@ -1,5 +1,8 @@
 const todayButton = document.getElementById("today");
-const tomorrowButton = document.getElementById("tomorrow");
+const threeDayButton = document.getElementById("3day");
+const sevenDayButton = document.getElementById("7day");
+const thenDayButton = document.getElementById("10day");
+
 
 todayButton.addEventListener("click", function () {
   if (navigator.geolocation) {
@@ -22,13 +25,15 @@ todayButton.addEventListener("click", function () {
       xhr.onload = function () {
         if (xhr.status === 200) {
           const response = JSON.parse(xhr.responseText);
-
+          let city = response.name;
           let temperature = response.main.temp;
+          let temperatureInCelsius = (temperature - 273.15).toFixed(0);
           let windSpeed = response.wind.speed;
           let humidity = response.main.humidity;
 
+          document.getElementById("city").textContent = "Текущий город: " + city;
           document.getElementById("temperature").textContent =
-            "Текущая температура: " + temperature + "°C";
+            "Текущая температура: " + temperatureInCelsius + "°C";
           document.getElementById("wind").textContent =
             "Скорость ветра: " + windSpeed + " м/c";
           document.getElementById("humidity").textContent =
@@ -40,15 +45,15 @@ todayButton.addEventListener("click", function () {
   }
 });
 
-tomorrowButton.addEventListener("click", function () {
+threeDayButton.addEventListener("click", function () {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       let latitude = position.coords.latitude;
       let longitude = position.coords.longitude;
 
       const apiKey = "fbe2c2fdac7fe2e53740d0f700d43424";
-      const weatherUrl =
-      'api.openweathermap.org/data/2.5/forecast/daily?lat=' +
+      const forecastUrl =
+        "https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=" +
         latitude +
         "&lon=" +
         longitude +
@@ -56,7 +61,7 @@ tomorrowButton.addEventListener("click", function () {
         apiKey;
 
       const xhr = new XMLHttpRequest();
-      xhr.open("GET", weatherUrl, true);
+      xhr.open("GET", forecastUrl, true);
 
       xhr.onload = function () {
         if (xhr.status === 200) {

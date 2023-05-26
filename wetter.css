@@ -77,23 +77,24 @@ p {
   height: 100%;
   overflow: hidden;
   pointer-events: none;
-}
+ }
 
 .meteor {
   position: absolute;
   width: 45px;
   height: 45px;
-  background-color: #f20808;
-  pointer-events: none;
+  background-image: url('meteor.png');
+  background-size: cover;
   animation-name: meteorFall;
   animation-duration: 2s;
   animation-timing-function: linear;
+ 
 }
 
 @keyframes meteorFall {
   0% {
-    opacity: 1;
-    transform: translateY(-100vh);
+   
+    transform: translate(0,-100%);
   }
   100% {
     opacity: 0;
