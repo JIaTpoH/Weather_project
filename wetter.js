@@ -45,44 +45,44 @@ todayButton.addEventListener("click", function () {
   }
 });
 
-threeDayButton.addEventListener("click", function () {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      let latitude = position.coords.latitude;
-      let longitude = position.coords.longitude;
+// threeDayButton.addEventListener("click", function () {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function (position) {
+//       let latitude = position.coords.latitude;
+//       let longitude = position.coords.longitude;
 
-      const apiKey = "fbe2c2fdac7fe2e53740d0f700d43424";
-      const forecastUrl =
-        "https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=" +
-        latitude +
-        "&lon=" +
-        longitude +
-        "&appid=" +
-        apiKey;
+//       const apiKey = "fbe2c2fdac7fe2e53740d0f700d43424";
+//       const forecastUrl =
+//         "https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=" +
+//         latitude +
+//         "&lon=" +
+//         longitude +
+//         "&appid=" +
+//         apiKey;
 
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET", forecastUrl, true);
+//       const xhr = new XMLHttpRequest();
+//       xhr.open("GET", forecastUrl, true);
 
-      xhr.onload = function () {
-        if (xhr.status === 200) {
-          const response = JSON.parse(xhr.responseText);
+//       xhr.onload = function () {
+//         if (xhr.status === 200) {
+//           const response = JSON.parse(xhr.responseText);
 
-          let temperature = response.main.temp;
-          let windSpeed = response.wind.speed;
-          let humidity = response.main.humidity;
+//           let temperature = response.main.temp;
+//           let windSpeed = response.wind.speed;
+//           let humidity = response.main.humidity;
 
-          document.getElementById("temperature").textContent =
-            "Текущая температура: " + temperature + "°C";
-          document.getElementById("wind").textContent =
-            "Скорость ветра: " + windSpeed + " м/c";
-          document.getElementById("humidity").textContent =
-            "Влажность: " + humidity + "%";
-        }
-      };
-      xhr.send();
-    });
-  }
-});
+//           document.getElementById("temperature").textContent =
+//             "Текущая температура: " + temperature + "°C";
+//           document.getElementById("wind").textContent =
+//             "Скорость ветра: " + windSpeed + " м/c";
+//           document.getElementById("humidity").textContent =
+//             "Влажность: " + humidity + "%";
+//         }
+//       };
+//       xhr.send();
+//     });
+//   }
+// });
 
 
 document
